@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAMPATH STORE - බහුලව අලෙවි වන භාණ්ඩ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e5799 0%, #207cca 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 0 0 10px 10px;
+            margin-bottom: 30px;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 70px;
+            height: 70px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 24px;
+            color: #1e5799;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .store-info h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .store-info p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .hero {
+            background: linear-gradient(rgba(30, 87, 153, 0.8), rgba(32, 124, 202, 0.8)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 60px 30px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: white;
+            color: #1e5799;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 40px 0 30px;
+            color: #1e5799;
+            font-size: 32px;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: #1e5799;
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .category-btn {
+            background: white;
+            border: 2px solid #1e5799;
+            color: #1e5799;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .category-btn.active, .category-btn:hover {
+            background: #1e5799;
+            color: white;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff6b6b;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 1;
+        }
+
+        .product-image {
+            height: 200px;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            color: #1e5799;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-info h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #1e5799;
+        }
+
+        .product-info p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .product-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .price {
+            font-weight: bold;
+            font-size: 18px;
+            color: #1e5799;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 14px;
+            margin-right: 5px;
+        }
+
+        .discount {
+            color: #ff6b6b;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .add-to-cart {
+            background: #1e5799;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background: #16457a;
+        }
+
+        .best-sellers {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .best-sellers h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 25px;
+            font-size: 28px;
+        }
+
+        .best-seller-products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .best-seller-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .best-seller-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .best-seller-icon {
+            font-size: 40px;
+            color: #ff6b6b;
+            margin-bottom: 15px;
+        }
+
+        .best-seller-card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .best-seller-card p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .payment-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .payment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .payment-icon {
+            font-size: 40px;
+            color: #1e5799;
+            margin-bottom: 15px;
+        }
+
+        .payment-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #1e5799;
+        }
+
+        .payment-card p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 35px;
+            color: #1e5799;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #1e5799;
+        }
+
+        .testimonials {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+        }
+
+        .testimonial {
+            text-align: center;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .testimonial:last-child {
+            border-bottom: none;
+        }
+
+        .testimonial p {
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: #1e5799;
+        }
+
+        footer {
+            background: #1e5799;
+            color: white;
+            padding: 40px 0 20px;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-section h3:after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 3px;
+            background: white;
+            margin-top: 8px;
+            border-radius: 2px;
+        }
+
+        .footer-section p, .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+
+            nav ul {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .hero h2 {
+                font-size: 28px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <div class="logo">S</div>
+                    <div class="store-info">
+                        <h1>SAMPATH STORE</h1>
+                        <p>ඔබේ විශ්වාසනීය සාප්පුව</p>
+                    </div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">මුල් පිටුව</a></li>
+                        <li><a href="#products">භාණ්ඩ</a></li>
+                        <li><a href="#bestsellers">බහුලව අලෙවි වන</a></li>
+                        <li><a href="#payment">ගෙවීම් ක්‍රම</a></li>
+                        <li><a href="#contact">අමතන්න</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="hero" id="home">
+            <h2>SAMPATH STORE වෙත සාදරයෙන් පිළිගනිමු</h2>
+            <p>බහුලව අලෙවි වන භාණ්ඩ සහ නව ගෙවීම් ක්‍රම සමඟ ඔබේ ගනුදෙනු ඉක්මනින් සහ ආරක්ෂිතව සිදු කරන්න</p>
+            <a href="#bestsellers" class="btn">බහුලව අලෙවි වන භාණ්ඩ දකින්න</a>
+        </section>
+
+        <h2 class="section-title" id="products">විකුණුම් භාණ්ඩ</h2>
+        
+        <div class="categories">
+            <button class="category-btn active" data-category="all">සියලුම</button>
+            <button class="category-btn" data-category="electronics">ඉලෙක්ට්‍රොනික</button>
+            <button class="category-btn" data-category="home">ගෘහ භාණ්ඩ</button>
+            <button class="category-btn" data-category="kitchen">පිසීමේ උපකරණ</button>
+        </div>
+        
+        <div class="products">
+            <div class="product-card" data-category="electronics">
+                <div class="popular-badge">ජනප්‍රිය</div>
+                <div class="product-image">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <div class="product-info">
+                    <h3>ස්මාර්ට්ෆෝන්</h3>
+                    <p>නවතම ස්මාර්ට්ෆෝන් මාදිලි. ඉහළ කාර්ය සාධනය සහ දිගු බැටරි ආයුෂය.</p>
+                    <div class="product-price">
+                        <div>
+                            <span class="original-price">රු. 50,000</span>
+                            <span class="price">රු. 45,000</span>
+                            <span class="discount">(10% වට්ටම්)</span>
+                        </div>
+                        <button class="add-to-cart">කරත්තයට</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card" data-category="electronics">
+                <div class="popular-badge">ජනප්‍රිය</div>
+                <div class="product-image">
+                    <i class="fas fa-laptop"></i>
+                </div>
+                <div class="product-info">
+                    <h3>ලැප්ටොප්</h3>
+                    <p>බලවත් ලැප්ටොප් පරිගණක. වැඩ, අධ්‍යයන සහ විනෝදය සඳහා සුදුසු.</p>
+                    <div class="product-price">
+                        <div>
+                            <span class="price">රු. 125,000</span>
+                        </div>
+                        <button class="add-to-cart">කරත්තයට</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card" data-category="electronics">
+                <div class="product-image">
+                    <i class="fas fa-headphones"></i>
+                </div>
+                <div class="product-info">
+                    <h3>හෙඩ්ෆෝන්</h3>
+                    <p>උසස් ශබ්ද ගුණාත්මකභාවය සහිත වයර්ලෙස් හෙඩ්ෆෝන්.</p>
+                    <div class="product-price">
+                        <div>
+                            <span class="original-price">රු. 15,000</span>
+                            <span class="price">රු. 12,500</span>
+                            <span class="discount">(17% වට්ටම්)</span>
+                        </div>
+                        <button class="add-to-cart">කරත්තයට</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card" data-category="home">
+                <div class="popular-badge">ජනප්‍රිය</div>
+                <div class="product-image">
+                    <i class="fas fa-fan"></i>
+                </div>
+                <div class="product-info">
+                    <h3>පංකා</h3>
+                    <p>බලපෑම් කාරී සහ නිශ්ශබ්ද පංකා. බලශක්ති සංරක්ෂණය කරන ආකෘති.</p>
+                    <div class="product-price">
+                        <div>
+                            <span class="price">රු. 12,000</span>
+                        </div>
+                        <button class="add-to-cart">කරත්තයට</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card" data-category="home">
+                <div class="product-image">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="product-info">
+                    <h3>LED බල්බ</h3>
+                    <p>දිගු ආයුෂ සහිත බලශක්ති සංරක්ෂණ LED බල්බ. විවිධ වර්ණ සහ වට්ටෝරු.</p>
+                    <div class="product-price">
+                        <div>
+                            <span class="price">රු. 800</span>
+                        </div>
+                        <button class="add-to-cart">කරත්තයට</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card" data-category="kitchen">
+                <div class="popular-badge">ජනප්‍රිය</div>
+                <div class="product-image">
+                    <i class="fas fa-blender"></i>
+                </div>
+                <div class="product-info">
+                    <h3>මික්සි</h3>
+                    <p>බලවත් මික්සි යන්ත්‍රය. ජුසි, ස්මූති සහ මිශ්‍රණ සෑදීමට සුදුසු.</p>
+                    <div class="product-price">
+                        <div>
+                            <span class="original-price">රු. 8,500</span>
+                            <span class="price">රු. 7,200</span>
+                            <span class="discount">(15% වට්ටම්)</span>
+                        </div>
+                        <button class="add-to-cart">කරත්තයට</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card" data-category="kitchen">
+                <div class="product-image">
+                    <i class="fas fa-temperature-high"></i>
+                </div>
+                <div class="product-info">
+                    <h3>මයික්‍රොවේව්</h3>
+                    <p>දිගු ආයුෂ සහිත මයික්‍රොවේව් උදුන. ඉක්මන් සහ සමාන රසය.</p>
+                    <div class="product-price">
+                        <div>
+                            <span class="price">රු. 25,000</span>
+                        </div>
+                        <button class="add-to-cart">කරත්තයට</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card" data-category="electronics">
+                <div class="product-image">
+                    <i class="fas fa-tablet-alt"></i>
+                </div>
+                <div class="product-info">
+                    <h3>ටැබ්ලට්</h3>
+                    <p>විශාල තිරයක් සහිත ටැබ්ලට්. කියවීම සහ වීඩියෝ නැරඹීම සඳහා සුදුසු.</p>
+                    <div class="product-price">
+                        <div>
+                            <span class="price">රු. 65,000</span>
+                        </div>
+                        <button class="add-to-cart">කරත්තයට</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="best-sellers" id="bestsellers">
+            <h2>බහුලව අලෙවි වන භාණ්ඩ</h2>
+            <div class="best-seller-products">
+                <div class="best-seller-card">
+                    <div class="best-seller-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>ස්මාර්ට්ෆෝන්</h3>
+                    <p>මාසයකට ඒකක 150+</p>
+                    <div class="price">රු. 45,000</div>
+                </div>
+                <div class="best-seller-card">
+                    <div class="best-seller-icon">
+                        <i class="fas fa-fan"></i>
+                    </div>
+                    <h3>පංකා</h3>
+                    <p>මාසයකට ඒකක 120+</p>
+                    <div class="price">රු. 12,000</div>
+                </div>
+                <div class="best-seller-card">
+                    <div class="best-seller-icon">
+                        <i class="fas fa-blender"></i>
+                    </div>
+                    <h3>මික්සි</h3>
+                    <p>මාසයකට ඒකක 80+</p>
+                    <div class="price">රු. 7,200</div>
+                </div>
+                <div class="best-seller-card">
+                    <div class="best-seller-icon">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <h3>ලැප්ටොප්</h3>
+                    <p>මාසයකට ඒකක 60+</p>
+                    <div class="price">රු. 125,000</div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title" id="payment">ගෙවීම් ක්‍රම</h2>
+        <div class="payment-methods">
+            <div class="payment-card">
+                <div class="payment-icon">
+                    <i class="fas fa-credit-card"></i>
+                </div>
+                <h3>ක්‍රෙඩිට් / ඩෙබිට් කාඩ්පත්</h3>
+                <p>Visa, MasterCard සහ American Express කාඩ්පත් සමඟ ආරක්ෂිතව ගෙවන්න</p>
+                <a href="#" class="btn">තෝරන්න</a>
+            </div>
+            <div class="payment-card">
+                <div class="payment-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>මොබයිල් ගෙවීම්</h3>
+                <p>ඔබේ මොබයිල් දුරකථනය භාවිතා කර ඉක්මනින් ගෙවන්න</p>
+                <a href="#" class="btn">තෝරන්න</a>
+            </div>
+            <div class="payment-card">
+                <div class="payment-icon">
+                    <i class="fas fa-university"></i>
+                </div>
+                <h3>බැංකු ගනුදෙනු</h3>
+                <p>සෘජු බැංකු හුවමාරුව හරහා ගෙවන්න</p>
+                <a href="#" class="btn">තෝරන්න</a>
+            </div>
+            <div class="payment-card">
+                <div class="payment-icon">
+                    <i class="fas fa-wallet"></i>
+                </div>
+                <h3>ඩිජිටල් පසුම්බි</h3>
+                <p>ඔබේ ප්‍රියතම ඩිජිටල් පසුම්බිය භාවිතා කරන්න</p>
+                <a href="#" class="btn">තෝරන්න</a>
+            </div>
+        </div>
+
+        <h2 class="section-title">පාරිභෝගික අදහස්</h2>
+        <div class="testimonials">
+            <div class="testimonial">
+                <p>"මම SAMPATH STORE සමඟ වසර කිහිපයක සිට ගනුදෙනු කරමි. ඔවුන්ගේ බහුලව අලෙවි වන භාණ්ඩ සැමවිටම ගුණාත්මක භාවයෙන් යුක්තයි."</p>
+                <div class="testimonial-author">- නිරන්ජන පෙරේරා</div>
+            </div>
+            <div class="testimonial">
+                <p>"ස්මාර්ට්ෆෝන් මිලදී ගත්තා. මිල සහ ගුණාත්මකභාවය ඉතා හොඳයි. බෙදාහැරීම් සේවයද ඉක්මන්."</p>
+                <div class="testimonial-author">- සුජාතා වික්‍රමසිංහ</div>
+            </div>
+            <div class="testimonial">
+                <p>"පංකා දෙකක් මිලදී ගත්තා. වසර දෙකක් තිස්සේ කිසිදු ගැටලුවක් නොමැතිව ක්‍රියාත්මක වේ."</p>
+                <div class="testimonial-author">- රවීන්ද්‍ර සිල්වා</div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SAMPATH STORE</h3>
+                    <p>ඔබේ විශ්වාසනීය සාප්පුව. අපි ඔබට හොඳම නිෂ්පාදන සහ සේවාවන් ලබා දෙන්නෙමු.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>සබැඳි</h3>
+                    <a href="#home">මුල් පිටුව</a>
+                    <a href="#products">භාණ්ඩ</a>
+                    <a href="#bestsellers">බහුලව අලෙවි වන</a>
+                    <a href="#payment">ගෙවීම් ක්‍රම</a>
+                    <a href="#contact">අමතන්න</a>
+                </div>
+                <div class="footer-section">
+                    <h3>අමතන්න</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> කොළඹ 05, ශ්‍රී ලංකාව</p>
+                    <p><i class="fas fa-phone"></i> +94 11 234 5678</p>
+                    <p><i class="fas fa-envelope"></i> info@sampathstore.lk</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 SAMPATH STORE. සියලුම හිමිකම් ඇවිරිණි.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Category filtering
+        document.querySelectorAll('.category-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                document.querySelectorAll('.category-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                const category = this.getAttribute('data-category');
+                const products = document.querySelectorAll('.product-card');
+                
+                products.forEach(product => {
+                    if (category === 'all' || product.getAttribute('data-category') === category) {
+                        product.style.display = 'block';
+                    } else {
+                        product.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Add to cart functionality
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const product = this.closest('.product-card');
+                const productName = product.querySelector('h3').textContent;
+                const productPrice = product.querySelector('.price').textContent;
+                
+                alert(`${productName} කරත්තයට එකතු කරන ලදී!\nමිල: ${productPrice}`);
+            });
+        });
+        
+        // Payment method selection
+        document.querySelectorAll('.payment-card .btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const paymentMethod = this.closest('.payment-card').querySelector('h3').textContent;
+                alert(`ඔබ ${paymentMethod} තෝරාගෙන ඇත!\nගෙවීම් පිටුවට හරවා යවනු ලැබේ...`);
+            });
+        });
+    </script>
+</body>
+</html>
